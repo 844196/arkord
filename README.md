@@ -11,7 +11,7 @@ EOF
 docker run -it --env-file .env --rm arkord:for-me
 ```
 
-```shell-session
+```console
 $ docker run -it --env-file .env --rm arkord:for-me
 ┌─────────┬───────┬───────────┐
 │ (index) │ name  │ duration  │
