@@ -1,3 +1,21 @@
-<p align="center">
-  <img src="https://i.gyazo.com/dc9072f8a595480d92f422d09c9994c8.png" />
-</p># draftbox
+```bash
+docker build . -t arkord:for-me
+```
+
+```bash
+cat <<EOF >.env
+SERVER_IP=127.0.0.1
+SERVER_PORT=27015
+EOF
+
+docker run -it --env-file .env --rm arkord:for-me
+```
+
+```shell-session
+$ docker run -it --env-file .env --rm arkord:for-me
+┌─────────┬───────┬───────────┐
+│ (index) │ name  │ duration  │
+├─────────┼───────┼───────────┤
+│    0    │ 'hoy' │ 'an hour' │
+└─────────┴───────┴───────────┘
+```
