@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "build/main.js",
   "license": "ISC",
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
     "dayjs": "^1.11.3",
     "source-server-query": "^3.0.0"
