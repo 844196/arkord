@@ -9,7 +9,8 @@ RUN \
   --mount=type=cache,target=/root/.npm \
   npm ci
 
-COPY tsconfig.json main.ts ./
+COPY tsconfig.json ./
+COPY src ./
 
 RUN npm run build
 
