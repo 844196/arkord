@@ -12,7 +12,7 @@ arkord
 <br />
 
 ```bash
-docker build . -t arkord:for-me
+docker build . -t ghcr.io/844196/arkord:latest
 ```
 
 ```bash
