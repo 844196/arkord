@@ -17,5 +17,5 @@ SERVER_LIST=[{"ip":"127.0.0.1","port":27015,"emoji":"️⛰️"},{"ip":"127.0.0.
 DISCORD_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxx
 EOF
 
-docker run -it --env-file .env --rm --detach ghcr.io/844196/arkord:latest
+docker run -it --env-file .env --name arkord --detach ghcr.io/844196/arkord:latest
 ```
