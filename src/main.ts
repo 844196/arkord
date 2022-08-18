@@ -1,5 +1,6 @@
 import { Client, IntentsBitField } from "discord.js";
 import query from "source-server-query";
+import { Log } from "./logging";
 import { ServerListSchema } from "./types";
 
 const { DISCORD_TOKEN = "", SERVER_LIST = "" } = process.env;
@@ -21,8 +22,11 @@ process.on("SIGINT", () => process.exit(1));
             unknown
           >[];
           return `${emoji}  ${players.length}`;
-        } catch (error) {
-          console.warn(error);
+        } catch (err) {
+          Log.warn({
+            req: { remoteAddress: ip, remotePort: port },
+            err,
+          });
           return `${emoji}  ?`;
         }
       })
