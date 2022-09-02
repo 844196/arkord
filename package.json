@@ -1,8 +1,8 @@
 {
   "name": "arkord",
   "version": "1.0.0",
+  "license": "MIT",
   "main": "build/main.js",
-  "license": "ISC",
   "scripts": {
     "build": "tsc"
   },
