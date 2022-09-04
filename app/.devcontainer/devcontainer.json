@@ -1,9 +1,9 @@
 {
-  "name": "${localWorkspaceFolderBasename}",
+  "name": "arkord/app",
   "dockerComposeFile": "../docker-compose.yml",
   "service": "workspace",
   "remoteUser": "node",
-  "workspaceFolder": "/opt/app",
+  "workspaceFolder": "/workspace/arkord/app",
   "features": {
     "ghcr.io/devcontainers/features/common-utils:1": {
       "version": "latest"
