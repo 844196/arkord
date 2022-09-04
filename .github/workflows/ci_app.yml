@@ -1,11 +1,14 @@
-name: CI
+name: CI (App)
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'app/**'
   pull_request:
-  workflow_dispatch:
+    paths:
+      - 'app/**'
 
 env:
   REGISTRY: ghcr.io
@@ -13,8 +16,11 @@ env:
 
 jobs:
   ci_app:
-    name: CI (App)
+    name: CI (Code)
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -28,6 +34,7 @@ jobs:
         with:
           node-version: ${{ steps.node_version.outputs.node_version }}
           cache: npm
+          cache-dependency-path: app/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -38,6 +45,9 @@ jobs:
   ci_docker:
     name: CI (Docker)
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -45,7 +55,7 @@ jobs:
       - name: Lint Dockerfile
         uses: hadolint/hadolint-action@v2.1.0
         with:
-          dockerfile: Dockerfile
+          dockerfile: app/Dockerfile
 
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v2
@@ -62,5 +72,7 @@ jobs:
       - name: Build image
         uses: docker/build-push-action@v3
         with:
+          context: app
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          push: false

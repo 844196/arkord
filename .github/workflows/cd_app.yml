@@ -1,9 +1,11 @@
-name: CD
+name: CD (App)
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'app/**'
 
 env:
   REGISTRY: ghcr.io
@@ -13,6 +15,9 @@ jobs:
   cd:
     name: Publish image
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -39,6 +44,7 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v3
         with:
-          push: true
+          context: app
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          push: true

@@ -7,9 +7,8 @@ FROM base as workspace
 WORKDIR /opt/app
 
 RUN \
-  install -o node -g node -d /opt/app/ && \
-  install -o node -g node -d /opt/app/build/ && \
-  install -o node -g node -d /opt/app/node_modules/
+  install -o node -g node -d /workspace/arkord/app/ && \
+  install -o node -g node -d /workspace/arkord/app/node_modules/
 
 USER node
 
