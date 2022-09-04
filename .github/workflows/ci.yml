@@ -2,6 +2,8 @@ name: CI
 
 on:
   push:
+    branches:
+      - main
   pull_request:
   workflow_dispatch:
 
@@ -11,7 +13,7 @@ env:
 
 jobs:
   ci_app:
-    name: Run CI (App)
+    name: CI (App)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,7 +36,7 @@ jobs:
         run: npm run build
 
   ci_docker:
-    name: Run CI (Docker)
+    name: CI (Docker)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

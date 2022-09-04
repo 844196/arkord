@@ -11,7 +11,7 @@ env:
 
 jobs:
   cd:
-    name: Run CD
+    name: Publish image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
