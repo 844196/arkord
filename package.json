@@ -4,6 +4,7 @@
   "license": "MIT",
   "main": "build/main.js",
   "scripts": {
+    "preinstall": "npx -y only-allow npm",
     "build": "tsc"
   },
   "dependencies": {
