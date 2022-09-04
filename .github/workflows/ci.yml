@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  ci:
-    name: Run CI
+  ci_app:
+    name: Run CI (App)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,3 +28,24 @@ jobs:
 
       - name: Run build
         run: npm run build
+
+  ci_docker:
+    name: Run CI (Docker)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@v2.1.0
+        with:
+          dockerfile: Dockerfile
+
+      - name: Setup Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build image
+        uses: docker/build-push-action@v3
+        with:
+          push: false
+          tags: ghcr.io/844196/arkord:${{ github.sha }}
