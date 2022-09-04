@@ -6,9 +6,11 @@ on:
       - main
     paths:
       - 'app/**'
+      - '.github/workflows/ci_app.yml'
   pull_request:
     paths:
       - 'app/**'
+      - '.github/workflows/ci_app.yml'
 
 env:
   REGISTRY: ghcr.io
