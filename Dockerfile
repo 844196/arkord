@@ -1,6 +1,21 @@
-# syntax=docker/dockerfile:1
+FROM node:16.16.0-bullseye as base
 
-FROM node:16.16.0-bullseye-slim as build
+# --------------------------------------------------------------------------------
+
+FROM base as workspace
+
+WORKDIR /opt/app
+
+RUN \
+  install -o node -g node -d /opt/app/ && \
+  install -o node -g node -d /opt/app/build/ && \
+  install -o node -g node -d /opt/app/node_modules/
+
+USER node
+
+# --------------------------------------------------------------------------------
+
+FROM base as build
 
 WORKDIR /opt/app
 
@@ -14,8 +29,9 @@ COPY src ./
 
 RUN npm run build
 
+# --------------------------------------------------------------------------------
 
-FROM node:16.16.0-bullseye-slim as runtime-deps
+FROM base as runtime-deps
 
 WORKDIR /opt/app
 
@@ -24,6 +40,7 @@ RUN \
   --mount=type=cache,target=/root/.npm \
   npm ci --omit=dev
 
+# --------------------------------------------------------------------------------
 
 FROM gcr.io/distroless/nodejs:16
 

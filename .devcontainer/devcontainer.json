@@ -1,0 +1,15 @@
+{
+  "name": "${localWorkspaceFolderBasename}",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "workspace",
+  "remoteUser": "node",
+  "workspaceFolder": "/opt/app",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:1": {
+      "version": "latest"
+    }
+  },
+  "customizations": {
+    "vscode": {}
+  }
+}

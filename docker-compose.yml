@@ -1,0 +1,17 @@
+services:
+  workspace:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: workspace
+    user: node
+    volumes:
+      - .:/opt/app:cached
+      - node_modules:/opt/app/node_modules
+      - build:/opt/app/build
+    tty: true
+    init: true
+
+volumes:
+  node_modules:
+  build:
