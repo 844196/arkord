@@ -5,6 +5,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
   ci_app:
     name: Run CI (App)
@@ -44,8 +48,14 @@ jobs:
       - name: Setup Buildx
         uses: docker/setup-buildx-action@v2
 
+      - name: Compute metadata (tags, labels) for image
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
       - name: Build image
         uses: docker/build-push-action@v3
         with:
-          push: false
-          tags: ghcr.io/844196/arkord:${{ github.sha }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
