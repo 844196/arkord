@@ -48,8 +48,8 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: app
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=cd_app
+          cache-to: type=gha,mode=max,scope=cd_app
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           push: true
