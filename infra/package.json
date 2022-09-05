@@ -1,0 +1,20 @@
+{
+  "name": "arkord-infra",
+  "version": "0.0.0",
+  "scripts": {
+    "preinstall": "npx -y only-allow npm",
+    "diff": "cdk diff",
+    "deploy": "cdk deploy --require-approval never"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.40.0",
+    "constructs": "10.1.94"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "1.0.3",
+    "@types/node": "18.7.14",
+    "aws-cdk": "2.40.0",
+    "ts-node": "10.9.1",
+    "typescript": "4.8.2"
+  }
+}

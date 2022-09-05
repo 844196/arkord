@@ -1,0 +1,15 @@
+{
+  "name": "arkord/infra",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "workspace",
+  "remoteUser": "node",
+  "workspaceFolder": "/workspace/arkord/infra",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:1": {
+      "version": "latest"
+    }
+  },
+  "customizations": {
+    "vscode": {}
+  }
+}
