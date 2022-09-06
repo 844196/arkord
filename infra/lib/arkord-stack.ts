@@ -19,16 +19,6 @@ export class ArkordStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const vpc = new Vpc(this, "Vpc", {
-      natGateways: 0,
-      subnetConfiguration: [
-        {
-          name: "Public",
-          subnetType: SubnetType.PUBLIC,
-        },
-      ],
-    });
-
     const appTask = new FargateTaskDefinition(this, "AppTask", {
       runtimePlatform: {
         cpuArchitecture: CpuArchitecture.X86_64,
@@ -67,14 +57,26 @@ export class ArkordStack extends Stack {
       }),
     });
 
+    const vpc = new Vpc(this, "Vpc", {
+      // 金がかかるので、クラスタをパブリックサブネットに直接配置する
+      natGateways: 0,
+      subnetConfiguration: [
+        {
+          name: "Public",
+          subnetType: SubnetType.PUBLIC,
+        },
+      ],
+    });
+
     const cluster = new Cluster(this, "FargateCluster", {
       vpc,
     });
 
-    const service = new FargateService(this, "AppService", {
+    new FargateService(this, "AppService", {
       cluster,
       taskDefinition: appTask,
       desiredCount: 1,
+      assignPublicIp: true, // SEE: https://abillyz.com/mamezou/studies/522
     });
   }
 }
