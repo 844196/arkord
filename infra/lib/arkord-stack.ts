@@ -11,7 +11,6 @@ export class ArkordStack extends Stack {
       natGateways: 0,
       subnetConfiguration: [
         {
-          cidrMask: 28,
           name: "Public",
           subnetType: SubnetType.PUBLIC,
         },
