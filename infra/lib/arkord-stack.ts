@@ -7,7 +7,7 @@ export class ArkordStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    new Vpc(this, "Vpc", {
+    const vpc = new Vpc(this, "Vpc", {
       natGateways: 0,
       subnetConfiguration: [
         {
@@ -15,6 +15,10 @@ export class ArkordStack extends Stack {
           subnetType: SubnetType.PUBLIC,
         },
       ],
+    });
+
+    new Cluster(this, "FargateCluster", {
+      vpc,
     });
   }
 }
