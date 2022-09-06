@@ -19,9 +19,7 @@ FROM base as build
 WORKDIR /opt/app
 
 COPY package.json package-lock.json ./
-RUN \
-  --mount=type=cache,target=/root/.npm \
-  npm ci
+RUN npm ci
 
 COPY tsconfig.json ./
 COPY src ./
@@ -35,9 +33,7 @@ FROM base as runtime-deps
 WORKDIR /opt/app
 
 COPY package.json package-lock.json ./
-RUN \
-  --mount=type=cache,target=/root/.npm \
-  npm ci --omit=dev
+RUN npm ci --omit=dev
 
 # --------------------------------------------------------------------------------
 
