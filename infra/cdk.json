@@ -20,6 +20,6 @@
     "@aws-cdk/aws-apigateway:disableCloudWatchRole": true,
     "@aws-cdk/core:enablePartitionLiterals": true,
     "@aws-cdk/core:target-partitions": ["aws", "aws-cn"],
-    "appContainerImage": "ghcr.io/844196/arkord:sha-7038620"
+    "appContainerImage": "ghcr.io/844196/arkord:sha-98bddbb"
   }
 }
