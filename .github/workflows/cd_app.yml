@@ -13,12 +13,14 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  cd:
+  publish-image:
     name: Publish image
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: app
+    outputs:
+      image-name: ${{ steps.image-name.outputs.sha-tagged }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -53,3 +55,10 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           push: true
+
+      - name: Compute published image name (SHA tagged)
+        id: image-name
+        run: |
+          TMP_META_JSON=$(mktemp)
+          echo '${{ steps.meta.outputs.json }}' > $TMP_META_JSON
+          echo ::set-output name=sha-tagged::$(jq -r '.tags[] | select("sha-")' $TMP_META_JSON)
