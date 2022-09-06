@@ -87,7 +87,7 @@ jobs:
         with:
           token: ${{ secrets.PAT }}
           add-paths: |
-            cdk.json
+            infra/cdk.json
           commit-message: ':rocket: Deploy `${{ needs.publish-image.outputs.image-name }}`'
           base: main
           branch: github/main/release
