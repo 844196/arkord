@@ -77,7 +77,7 @@ jobs:
       - name: Update container image
         run: |
           TMP_CDK_JSON=$(mktemp)
-          jq '.context.appContainerImage|="${{ needs.publish-image.outputs.image-name }}"' cdk.json > $TMP_META_JSON
+          jq '.context.appContainerImage|="${{ needs.publish-image.outputs.image-name }}"' cdk.json > $TMP_CDK_JSON
           cat $TMP_CDK_JSON > cdk.json
           npx -y -- prettier -w cdk.json
 
