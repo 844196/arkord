@@ -29,7 +29,7 @@ export class ArkordStack extends Stack {
     });
 
     appTask.addContainer("AppContainer", {
-      image: ContainerImage.fromRegistry("ghcr.io/844196/arkord:latest"),
+      image: ContainerImage.fromRegistry(this.node.tryGetContext("appContainerImage")),
       linuxParameters: new LinuxParameters(this, "AppTaskLinuxParameters", {
         initProcessEnabled: true,
       }),
