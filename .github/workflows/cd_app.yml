@@ -61,7 +61,7 @@ jobs:
         run: |
           TMP_META_JSON=$(mktemp)
           echo '${{ steps.meta.outputs.json }}' > $TMP_META_JSON
-          echo ::set-output name=sha-tagged::$(jq -r '.tags[] | select("sha-")' $TMP_META_JSON)
+          echo ::set-output name=sha-tagged::$(jq -r '.tags[] | select(contains("sha-"))' $TMP_META_JSON)
 
   update-service:
     name: Update service
