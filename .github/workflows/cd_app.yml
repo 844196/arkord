@@ -90,7 +90,6 @@ jobs:
             infra/cdk.json
           commit-message: ':rocket: Deploy `${{ needs.publish-image.outputs.image-name }}`'
           base: main
-          branch: github/main/release
-          branch-suffix: short-commit-hash
+          branch: github/main/update-image
           delete-branch: true
           title: ':rocket: Deploy `${{ needs.publish-image.outputs.image-name }}`'
