@@ -4,6 +4,7 @@ import {
   Cluster,
   ContainerImage,
   CpuArchitecture,
+  FargateService,
   FargateTaskDefinition,
   LinuxParameters,
   LogDriver,
@@ -26,10 +27,6 @@ export class ArkordStack extends Stack {
           subnetType: SubnetType.PUBLIC,
         },
       ],
-    });
-
-    new Cluster(this, "FargateCluster", {
-      vpc,
     });
 
     const appTask = new FargateTaskDefinition(this, "AppTask", {
@@ -68,6 +65,16 @@ export class ArkordStack extends Stack {
         streamPrefix: "ecs",
         logRetention: RetentionDays.SIX_MONTHS,
       }),
+    });
+
+    const cluster = new Cluster(this, "FargateCluster", {
+      vpc,
+    });
+
+    const service = new FargateService(this, "AppService", {
+      cluster,
+      taskDefinition: appTask,
+      desiredCount: 1,
     });
   }
 }
