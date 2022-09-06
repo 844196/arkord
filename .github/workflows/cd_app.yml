@@ -62,3 +62,35 @@ jobs:
           TMP_META_JSON=$(mktemp)
           echo '${{ steps.meta.outputs.json }}' > $TMP_META_JSON
           echo ::set-output name=sha-tagged::$(jq -r '.tags[] | select("sha-")' $TMP_META_JSON)
+
+  update-service:
+    name: Update service
+    runs-on: ubuntu-latest
+    needs: publish-image
+    defaults:
+      run:
+        working-directory: infra
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Update container image
+        run: |
+          TMP_CDK_JSON=$(mktemp)
+          jq '.context.appContainerImage|="${{ needs.publish-image.outputs.image-name }}"' cdk.json > $TMP_META_JSON
+          cat $TMP_CDK_JSON > cdk.json
+          npx -y -- prettier -w cdk.json
+
+      - name: Create pull request
+        id: pr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.PAT }}
+          add-paths: |
+            cdk.json
+          commit-message: ':rocket: Deploy `${{ needs.publish-image.outputs.image-name }}`'
+          base: main
+          branch: github/main/release
+          branch-suffix: short-commit-hash
+          delete-branch: true
+          title: ':rocket: Deploy `${{ needs.publish-image.outputs.image-name }}`'
