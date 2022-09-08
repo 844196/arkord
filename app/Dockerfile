@@ -35,7 +35,7 @@ RUN \
 
 # --------------------------------------------------------------------------------
 
-FROM gcr.io/distroless/nodejs:16
+FROM gcr.io/distroless/nodejs:18
 
 COPY --chown=nonroot:nonroot package.json package-lock.json /opt/app/
 COPY --chown=nonroot:nonroot --from=build /opt/app/node_modules /opt/app/node_modules
