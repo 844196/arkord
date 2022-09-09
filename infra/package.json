@@ -1,6 +1,7 @@
 {
-  "name": "arkord-infra",
+  "name": "@arkord/infra",
   "version": "0.0.0",
+  "license": "ISC",
   "scripts": {
     "preinstall": "npx -y only-allow npm",
     "diff": "cdk diff",
