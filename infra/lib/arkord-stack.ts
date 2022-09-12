@@ -75,7 +75,7 @@ export class ArkordStack extends Stack {
     new FargateService(this, "AppService", {
       cluster,
       taskDefinition: appTask,
-      desiredCount: 1,
+      desiredCount: 0,
       assignPublicIp: true, // SEE: https://abillyz.com/mamezou/studies/522
     });
   }
