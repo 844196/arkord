@@ -11,7 +11,7 @@
     "bunyan": "1.8.15",
     "discord.js": "14.3.0",
     "source-server-query": "3.0.0",
-    "zod": "3.19.0"
+    "zod": "3.23.8"
   },
   "devDependencies": {
     "@tsconfig/node16": "1.0.3",
