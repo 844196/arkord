@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "bunyan": "1.8.15",
-    "discord.js": "14.3.0",
+    "discord.js": "14.16.3",
     "source-server-query": "3.0.0",
     "zod": "3.19.0"
   },
