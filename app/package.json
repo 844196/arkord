@@ -14,7 +14,7 @@
     "zod": "3.19.0"
   },
   "devDependencies": {
-    "@tsconfig/node16": "1.0.3",
+    "@tsconfig/node16": "1.0.4",
     "@types/bunyan": "1.8.8",
     "@types/node": "18.0.3",
     "prettier": "2.7.1",
