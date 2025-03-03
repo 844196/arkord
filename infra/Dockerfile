@@ -1,4 +1,4 @@
-FROM node:16.17.0-bullseye as workspace
+FROM node:16.20.2-bullseye as workspace
 
 WORKDIR /opt/app
 
